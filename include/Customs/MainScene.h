@@ -30,7 +30,7 @@ private:
   void CreateQuitButton();
 
   void CreateMusic();
-  //void CreateBackground();
+  void CreateBackground();
   //void CreateGamemodes();
 
 };

@@ -3,10 +3,12 @@
 
 #include "Components/CircleRenderer.h"
 #include "Components/RectangleRenderer.h"
+#include "Components/RectangleCollider.h"
 #include "Components/Renderer.h"
 #include "Components/Rigidbody.h"
 #include "Components/UIText.h"
 #include "Customs/MapScript.h"
+#include "Customs/CactusScript.h"
 #include "Customs/NakedManScript.h"
 #include "Engine/GameObject.h"
 #include "Engine/Scene.h"
@@ -21,6 +23,7 @@ public:
 private:
   void CreateNakedMan();
   void CreateMap();
+  void CreateCactus();
 };
 
 #endif

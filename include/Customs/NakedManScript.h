@@ -21,6 +21,8 @@ protected:
 
 private:
   float walkSpeed = 17;
+  float jumpForce = 0;
+  float gravity = 2;
   InputSystem *input = nullptr;
   Animator *animator = nullptr;
   Vector *position = nullptr;

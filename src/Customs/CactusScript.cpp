@@ -1,21 +1,22 @@
-#include "Customs/MapScript.h"
+#include "Customs/CactusScript.h"
 
-MapScript::MapScript(GameObject *owner) : Script(owner) {}
+CactusScript::CactusScript(GameObject *owner) : Script(owner) {}
 
-void MapScript::Start() {
-  nakedMan = SceneManager::GetInstance()->GetScene("Gameplay")->GetGameObject("NakedMan");
+void CactusScript::Start() {
+  nakedMan = SceneManager::GetInstance()->GetScene("Gameplay")->GetGameObject("Cactus");
   nakedManPosition = nakedMan->GetPosition();
-  script = (NakedManScript *)nakedMan->GetComponent("NakedManScript");
+  script = (NakedManScript *)nakedMan->GetComponent("CactusScript");
 }
 
-void MapScript::ComponentUpdate() {}
+void CactusScript::ComponentUpdate() {}
 
-void MapScript::FixedComponentUpdate() {
+void CactusScript::FixedComponentUpdate() {
   nakedManMovements = script->GetMovement();
   GetOwner()->GetPosition()->m_x -= 10;
   //cout <<  GetOwner()->GetPosition()->m_x << endl;
-  if(GetOwner()->GetPosition()->m_x  < -2000){
-    GetOwner()->GetPosition()->m_x = 1960;
+  
+  if(GetOwner()->GetPosition()->m_x  < -200){
+    GetOwner()->GetPosition()->m_x = 1000;
   }
   
   /*if (!nakedManMovements)

@@ -11,13 +11,22 @@ void NakedManScript::Start() {
 void NakedManScript::ComponentUpdate() {
 static int lastDirection=1;
   // movement animation and input detection
+  animator->GetAnimation("Walk Side")->SetFlip(false, false);
+  animator->PlayAnimation("Walk Side");
+
   movements = movements & 0x00;
   if (input->GetKeyPressed(INPUT_W)) {
-    lastDirection=0;
+    //lastDirection=0;
     movements = movements | 0x08;
     animator->PlayAnimation("Walk Up");
 
-  } else if (input->GetKeyPressed(INPUT_S)) {
+  } 
+  if(position->m_y < 600){
+    animator->PlayAnimation("Walk Up");
+
+  }
+/*
+  else if (input->GetKeyPressed(INPUT_S)) {
     lastDirection=1;
     movements = movements | 0x04;
     animator->PlayAnimation("Walk Down");
@@ -49,25 +58,36 @@ static int lastDirection=1;
 
     //  animator->StopAllAnimations();
 
-  }
+  }*/
 
   if (InputSystem::GetInstance()->GetKeyUp(INPUT_ESCAPE)) {
-    auto var = (UIText *)SceneManager::GetInstance()
-                   ->GetScene("Main")
-                   ->GetGameObject("Play")
-                   ->GetComponent("UIText");
-    var->SetText("Continue");
+    //auto var = (UIText *)SceneManager::GetInstance()->GetScene("Main")->GetGameObject("Play")->GetComponent("UIText");
+    //var->SetText("Continue");
     SceneManager::GetInstance()->SetCurrentScene("Main");
   }
-     if (InputSystem::GetInstance()->GetKeyUp(INPUT_UP)) {
-        SceneManager::GetInstance()->SetCurrentScene("CatchAll");
-      }
+  if (InputSystem::GetInstance()->GetKeyUp(INPUT_UP)) {
+      SceneManager::GetInstance()->SetCurrentScene("CatchAll");
+  }
 
 }
 
 void NakedManScript::FixedComponentUpdate() {
-  if (0x08 & movements)
-    position->m_y -= walkSpeed;
+  if (0x08 & movements){
+    //position->m_y -= walkSpeed;
+    jumpForce = 10;
+    position->m_y = position->m_y - jumpForce;
+    jumpForce = jumpForce - gravity;
+  }
+  if(position->m_y < 600){
+    position->m_y = position->m_y - jumpForce;
+    jumpForce = jumpForce - gravity;
+    //jumpForce -= gravity; 
+    //position->m_y -= jumpForce;
+  }
+  //cout << position->m_y << endl;
+  
+
+/*
   else if (0x04 & movements)
     position->m_y += walkSpeed;
   else if (0x02 & movements)
@@ -83,4 +103,6 @@ void NakedManScript::FixedComponentUpdate() {
     position->m_y = deadzone_y - 64;
   if (position->m_y <= deadzone_y - 200)
     position->m_y = deadzone_y - 200;
+
+    */
 }
