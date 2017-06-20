@@ -6,6 +6,7 @@
 #include "Components/UIText.h"
 #include "Engine/InputSystem.h"
 #include "Engine/SceneManager.h"
+#include "Engine/GameObject.h"
 #include "Globals/EngineGlobals.h"
 
 class NakedManScript : public Script {
@@ -18,6 +19,7 @@ public:
 
 protected:
   void ComponentUpdate() override;
+  void GameCollisionCheck();
 
 private:
   float walkSpeed = 17;

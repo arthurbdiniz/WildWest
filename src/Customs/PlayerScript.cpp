@@ -2,33 +2,126 @@
 #include "Components/UIText.h"
 PlayerScript::PlayerScript(GameObject *owner) : Script(owner){};
 
-void PlayerScript::ComponentUpdate() { HandleInput(); }
+void PlayerScript::Start() {
+  position = GetOwner()->GetPosition();
+  animator = (Animator *)GetOwner()->GetComponent("Animator");
+  input = InputSystem::GetInstance();
+}
 
-void PlayerScript::HandleInput() {
-  m_movement.m_x = m_movement.m_y = 0;
+void PlayerScript::ComponentUpdate() {
+static int lastDirection=1;
+  // movement animation and input detection
+ 
+  animator->GetAnimation("Walk Side")->SetFlip(false, false);
+  animator->PlayAnimation("Walk Side");
 
-  if (InputSystem::GetInstance()->GetKeyPressed(INPUT_D))
-    m_movement.m_x += 1;
-  if (InputSystem::GetInstance()->GetKeyPressed(INPUT_A))
-    m_movement.m_x -= 1;
-  if (InputSystem::GetInstance()->GetKeyPressed(INPUT_S))
-    m_movement.m_y += 1;
-  if (InputSystem::GetInstance()->GetKeyPressed(INPUT_W))
-    m_movement.m_y -= 1;
+  movements = movements & 0x00;
+  if (input->GetKeyPressed(INPUT_W)) {
+    //lastDirection=0;
+    movements = movements | 0x08;
+    //****aanimator->PlayAnimation("Walk Up");
 
-  m_movement = m_movement.GetNormalized();
+  } 
+  if(position->m_y < 600){
+    //****aanimator->PlayAnimation("Walk Up");
+
+  }
+
+/*
+  else if (input->GetKeyPressed(INPUT_S)) {
+    lastDirection=1;
+    movements = movements | 0x04;
+    animator->PlayAnimation("Walk Down");
+  } else if (input->GetKeyPressed(INPUT_A)) {
+    lastDirection=2;
+    movements = movements | 0x02;
+    animator->GetAnimation("Walk Side")->SetFlip(true, false);
+    animator->PlayAnimation("Walk Side");
+    lastDirection=3;
+  } else if (input->GetKeyPressed(INPUT_D)) {
+   lastDirection=3;
+    movements = movements | 0x01;
+    animator->GetAnimation("Walk Side")->SetFlip(false, false);
+    animator->PlayAnimation("Walk Side");
+  } else {
+
+          if(lastDirection==0){
+          animator->PlayAnimation("Stop Up");
+          }
+          else if(lastDirection==1){
+          animator->PlayAnimation("Stop Down");
+          }
+          else if(lastDirection==2){
+          animator->PlayAnimation("Stop Left");
+          }
+          else if(lastDirection==3){
+          animator->PlayAnimation("Stop Right");
+          }
+
+    //  animator->StopAllAnimations();
+
+  }*/
 
   if (InputSystem::GetInstance()->GetKeyUp(INPUT_ESCAPE)) {
-      auto var = (UIText *)SceneManager::GetInstance()
-                     ->GetScene("Main")
-                     ->GetGameObject("Play")
-                     ->GetComponent("UIText");
-      var->SetText("Continue");
-      SceneManager::GetInstance()->SetCurrentScene("Main");
-    }
+    //auto var = (UIText *)SceneManager::GetInstance()->GetScene("Main")->GetGameObject("Play")->GetComponent("UIText");
+    //var->SetText("Continue");
+    SceneManager::GetInstance()->SetCurrentScene("Main");
+  }
+  if (InputSystem::GetInstance()->GetKeyUp(INPUT_UP)) {
+      SceneManager::GetInstance()->SetCurrentScene("CatchAll");
+  }
+
 }
 
 void PlayerScript::FixedComponentUpdate() {
-  GetOwner()->GetPosition()->m_x += m_movement.m_x * m_speed;
-  GetOwner()->GetPosition()->m_y += m_movement.m_y * m_speed;
+  if (0x08 & movements){
+    //position->m_y -= walkSpeed;
+    jumpForce = 10;
+    position->m_y = position->m_y - jumpForce;
+    jumpForce = jumpForce - gravity;
+  }
+  if(position->m_y < 600){
+    position->m_y = position->m_y - jumpForce;
+    jumpForce = jumpForce - gravity;
+    //jumpForce -= gravity; 
+    //position->m_y -= jumpForce;
+  }
+  //cout << position->m_y << endl;
+  
+
+/*
+  else if (0x04 & movements)
+    position->m_y += walkSpeed;
+  else if (0x02 & movements)
+    position->m_x -= walkSpeed;
+  else if (0x01 & movements)
+    position->m_x += walkSpeed;
+
+  if (position->m_x + 64 >= deadzone_x)
+    position->m_x = deadzone_x - 64;
+  if (position->m_x <= deadzone_x - 200)
+    position->m_x = deadzone_x - 200;
+  if (position->m_y + 64 >= deadzone_y)
+    position->m_y = deadzone_y - 64;
+  if (position->m_y <= deadzone_y - 200)
+    position->m_y = deadzone_y - 200;
+
+    */
+}
+
+void PlayerScript::GameCollisionCheck() {
+  /*
+  for (auto obj : GetOwner()->GetCollisions()) {
+    SceneManager::GetInstance()->SetCurrentScene("GameOver");
+    
+    if (obj->GetTag() == "Player") {
+      cout << "Collision" << endl;
+      //CatchAllController::GetInstance()->KillPlayer(GetOwner());
+    } else if (obj->GetTag() == "Cactus") {
+      //MissileController::GetInstance()->KillPlayer(GetOwner());
+      cout << "Collision" << endl;
+    }
+    
+  }
+  */
 }

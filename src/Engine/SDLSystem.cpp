@@ -1,9 +1,10 @@
 #include "Engine/SDLSystem.h"
 
 // load commons includes
-#include "Customs/CatchAllScene.h"
-#include "Customs/MainScene.h"
 #include "Customs/GamePlayScene.h"
+#include "Customs/MainScene.h"
+#include "Customs/GameOverScene.h"
+//#include <Customs/MissileScene.h>
 
 // static variables initialization
 SDLSystem *SDLSystem::m_instance = nullptr;
@@ -41,7 +42,7 @@ void SDLSystem::Run() {
   m_isRunning = true;
 
   LoadCommons();
-  SceneManager::GetInstance()->SetCurrentScene("Main"); // must be called here but scene name can be changed
+  SceneManager::GetInstance()->SetCurrentScene("MainScene"); // must be called here but scene name can be changed
   SceneManager::GetInstance()->Start();
 
   while (m_isRunning) {
@@ -50,6 +51,12 @@ void SDLSystem::Run() {
 
     CalculateFramerate();
     InputSystem::GetInstance()->UpdateStates();
+
+    if (InputSystem::GetInstance()->GetKeyDown(INPUT_ESCAPE)) {
+        if(SceneManager::GetInstance()->GetCurrentScene()->GetName() != "MainScene") {
+            SceneManager::GetInstance()->SetCurrentScene("MainScene");
+        }
+    }
 
 
     // all updates but draw are called here
@@ -127,7 +134,7 @@ bool SDLSystem::InitIMG() {
 bool SDLSystem::InitMixer() {
   INFO("Initializing Mixer");
 
-  int init = Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 2048);
+  int init = Mix_OpenAudio(22050, MIX_DEFAULT_FORMAT, 2, 4096);
 
   if (init != 0) {
     SDL_MIX_ERROR("SDLSystem::InitMixer() failed.");
@@ -189,22 +196,21 @@ void SDLSystem::CalculateFramerate() {
     m_framerate = m_frameCounter;
     m_frameCounter = 0;
     m_lastFrameTicks = m_currentTicks;
-    INFO("Framerate per second: " << m_framerate);
+    // INFO("Framerate per second: " << m_framerate);
   }
   m_frameCounter++;
 }
 
 void SDLSystem::LoadCommons() {
   auto mainScene = new MainScene();
-   auto gameplayScene = new GamePlayScene();
-  auto catchAllScene = new CatchAllScene();
+  auto gamePlayScene = new GamePlayScene();
+  auto gameOverScene = new GameOverScene();
+  //auto missileScene = new MissileScene();
 
-  SceneManager::GetInstance()->AddScene(std::make_pair("Main", mainScene));
-
-  SceneManager::GetInstance()->AddScene(std::make_pair("Gameplay", gameplayScene));
-
-  SceneManager::GetInstance()->AddScene(std::make_pair("CatchAll", catchAllScene));
-
+  //SceneManager::GetInstance()->AddScene(std::make_pair("Missile", missileScene));
+  SceneManager::GetInstance()->AddScene(std::make_pair("MainScene", mainScene));
+  SceneManager::GetInstance()->AddScene(std::make_pair("Gameplay", gamePlayScene));
+  SceneManager::GetInstance()->AddScene(std::make_pair("GameOver", gameOverScene));
 }
 
 bool SDLSystem::FixFramerate() {

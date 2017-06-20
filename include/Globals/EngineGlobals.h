@@ -4,7 +4,7 @@
 #include <string>
 
 namespace EngineGlobals {
-const std::string engine_name = "SquareOrDie";
+const std::string engine_name = "WildWest";
 const std::string engine_version = "0.1";
 const std::string window_title = engine_name + " " + engine_version;
 

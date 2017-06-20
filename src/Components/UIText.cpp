@@ -1,5 +1,7 @@
 #include "Components/UIText.h"
 
+
+
 UIText::UIText(GameObject *owner, string message, string fontPath, int size,
                Uint8 r, Uint8 g, Uint8 b, Uint8 a, Uint8 mode)
     : Component(owner, C_DRAW) {
@@ -61,4 +63,9 @@ void UIText::OnPropertyChange() {
 void UIText::SetText(string text) {
   m_message = text;
   OnPropertyChange();
+}
+
+string UIText::GetText() {
+  return m_message;
+  //OnPropertyChange();
 }

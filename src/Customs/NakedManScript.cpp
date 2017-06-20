@@ -106,3 +106,16 @@ void NakedManScript::FixedComponentUpdate() {
 
     */
 }
+
+void NakedManScript::GameCollisionCheck() {
+  for (auto obj : GetOwner()->GetCollisions()) {
+    
+    if (obj->GetTag() == "Cactus") {
+      cout << "Collision" << endl;
+      //CatchAllController::GetInstance()->KillPlayer(GetOwner());
+    } else if (obj->GetTag() == "Catcher") {
+      //MissileController::GetInstance()->KillPlayer(GetOwner());
+      cout << "Collision" << endl;
+    }
+  }
+}

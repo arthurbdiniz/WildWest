@@ -9,7 +9,7 @@ void MainScene::OnActivation() {
   CreateLogo();
   CreatePlayButton();
   CreateQuitButton();
-  CreateMusic();
+  //CreateMusic();
   //CreateGamemodes();
 
 }

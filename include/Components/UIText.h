@@ -2,13 +2,13 @@
 #define __UI_TEXT__
 
 #include <string>
-
 #include "Engine/Component.h"
 #include "Engine/GameObject.h"
 #include "Engine/GraphicsSystem.h"
 #include "Engine/SDLSystem.h"
 #include "Engine/sdl2include.h"
 #include "Log/sdl_log.h"
+
 
 using namespace std;
 
@@ -21,6 +21,7 @@ public:
   void FixedComponentUpdate() override;
   void ComponentUpdate() override;
   void SetText(string text);
+  string GetText();
   void SetOffset(Vector &offset);
 
 private:
