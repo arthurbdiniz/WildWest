@@ -6,12 +6,10 @@ void GameOverScene::OnActivation() {
   m_width_middle = EngineGlobals::screen_width / 2;
   m_height_middle = EngineGlobals::screen_height / 2;
   CreateBackground();
-  CreateLogo();
   CreatePlayAgainButton();
   CreateQuitButton();
   CreatePlayerScore();
-  //CreateMusic();
-  //CreateGamemodes();
+  
 
 }
 
@@ -23,13 +21,9 @@ void GameOverScene::OnShown() {
                    ->GetScene("Gameplay")
                    ->GetGameObject("Score")
                    ->GetComponent("UIText");
-            
+        
   std::string score = var->GetText(); // Como pegar Text de outra view
   m_playerScoreText->SetText(score);
-  cout << var->GetText() << endl;
-
-
-
   auto script = (ScoreScript*)SceneManager::GetInstance()
                    ->GetScene("Gameplay")
                    ->GetGameObject("Score")
@@ -38,24 +32,7 @@ void GameOverScene::OnShown() {
 
 
 }
-
 void GameOverScene::OnHidden() {}
-
-
-void GameOverScene::CreateLogo() {
-  /*
-  int xMiddle = EngineGlobals::screen_width / 2 - 100;
-
-  auto logo = new GameObject("Logo", new Vector(xMiddle, 100), 200, 100, 1);
-
-  auto logoText =
-      new UIText(logo, "Wild West ", "assets/Archivo_Black/ArchivoBlack-Regular.ttf",
-                 200, 255, 255, 255, 255, 1);
-
-  AddGameObject(logo);
-  */
-}
-
 
 
 void GameOverScene::CreatePlayAgainButton() {
@@ -95,14 +72,8 @@ void GameOverScene::CreateBackground() {
 
   auto backgrImage = new Image("assets/Images/bg_menu.png", 0, 0, 1000, 597);
   auto mapRenderer1 = new Renderer(background, backgrImage);
-
-  //auto backgroundRectangle = new RectangleRenderer(background, Vector(0, 0), m_width_middle * 2, m_height_middle * 2);
-  //backgroundRectangle->SetColor(100, 100, 20, 255);
   AddGameObject(background);
 }
-
-
-
 
 void GameOverScene::CreateMusic(){
 
@@ -116,25 +87,10 @@ void GameOverScene::CreateMusic(){
 
 void GameOverScene::CreatePlayerScore() {
  
-
-
   int xMiddle = EngineGlobals::screen_width / 2 - 100;
-
   auto playerScore = new GameObject("Score", new Vector(xMiddle, 20), 200, 100, 1);
-  /*
-  auto var = (UIText *)SceneManager::GetInstance()
-                   ->GetScene("Gameplay")
-                   ->GetGameObject("Score")
-                   ->GetComponent("UIText");
-          */       
-  //std::string score = var->GetText(); // Como pegar Text de outra view
-  //cout << var->GetText() << endl;
   auto playerScoreText = new UIText(playerScore, "Score: ", "assets/Carnevalee/Carnevalee-Freakshow.ttf",
                              150, 0, 0, 0, 150, 1);
   m_playerScoreText = playerScoreText;
-
-
-  
-
   AddGameObject(playerScore);
 }

@@ -21,8 +21,6 @@ void GamePlayScene::CreateNakedMan() {
 
   auto player = new GameObject("NakedMan", new Vector(xPos, yPos), 120, 147, 2);
   player->SetTag("Player");
-
-
   // animations
   auto playerSprite = new Image("assets/Images/player.png", 0, 0, 1199, 294);
 
@@ -37,9 +35,6 @@ void GamePlayScene::CreateNakedMan() {
   auto walkUpAnimation = new Animation(player, playerSprite);
   for (int i = 1; i < 5; i++)
     walkUpAnimation->AddFrame(new Frame(i * 120, 147, 120, 147));
-
-  
-
   // animator
   auto playerAnimator = new Animator(player);
 
@@ -54,30 +49,11 @@ void GamePlayScene::CreateNakedMan() {
 
   // Collider
   auto playerCollider = new RectangleCollider(player, Vector(0, 0), 80, 130, 0);
-
   auto jumpSoundEffect = new UISound(player, "SFXJump", "assets/Audio/jump.wav", false, true);
   
-  // rigidbody
-  //auto nakedManRB = new Rigidbody(nakedMan);
-
   AddGameObject(player);
 
 
-/***
-  std::string playerName = "Player";
-  auto player = new GameObject(playerName, new Vector(xPos, yPos), 40, 60, 2);
-  player->SetTag("Player");
-  
-  auto playerRectangle = new RectangleRenderer(player, Vector(0, 0), 40, 60);
-    
-  int color1 = rand() % 255, color2 = rand() % 255, color3 = rand() % 255;
-  playerRectangle->SetColor(color1, color2, color3, 255);
-  auto playerScript = new PlayerScript(player);
-  auto playerCollider = new RectangleCollider(player, Vector(0, 0), 40, 60, 0);
-  //CatchAllController::GetInstance()->AddPlayer(player);
-  AddGameObject(player);
-
-    *///
 }
 
 void GamePlayScene::CreateMap() {
@@ -106,68 +82,35 @@ void GamePlayScene::CreateMap() {
 
 void GamePlayScene::CreateCactus() {
 
-/************
-  auto cactus = new GameObject("Cactus", new Vector(800 ,600),80, 150 , 1);
-  cactus->SetTag("Cactus");
-  // Renderer
-  auto cactusImage = new Image("assets/Images/cactus.png", 0, 0, 373, 520);
-  auto cactusRenderer = new Renderer(cactus, cactusImage);
-  
-  // Collider
-  auto cactusCollider = new RectangleCollider(cactus, Vector(0, 0), 100, 500, 1);
-
-  // Script
-  auto cactusScript = new CactusScript(cactus);
-
-  GamePlayController::GetInstance()->AddCactus(cactus);
-
-  
-  AddGameObject(cactus);
-
-  *****/
-
   std::string playerName = "Cactus";
   auto cactus = new GameObject(playerName, new Vector(800, 620), 80, 120, 2);
   cactus->SetTag("Cactus");
   
-  //auto cactusRectangle = new RectangleRenderer(cactus, Vector(0, 0), 40, 60);
   auto cactusImage = new Image("assets/Images/cactus.png", 0, 0, 373, 520);
   auto cactusRenderer = new Renderer(cactus, cactusImage);
   
-  //cactusRectangle->SetColor(66, 244, 95, 255);
   auto cactusScript = new CactusScript(cactus);
   auto cactusCollider = new RectangleCollider(cactus, Vector(0, 0), 50, 120, 0);
-  //CatchAllController::GetInstance()->AddPlayer(cactus);
+
   AddGameObject(cactus);
 }
 
 void GamePlayScene::CreateScore() {
 
-  
   auto score = new GameObject("Score", new Vector(800, 10), 150 , 100, 2);
   score->SetTag("Score");
   
   auto scoreText = new UIText(score, "0", "assets/Carnevalee/Carnevalee-Freakshow.ttf", 150, 0 , 0, 0, 0, 1);
 
-  //auto scoreRectangle = new RectangleRenderer(score, Vector(0, 0), 500, 150);
-    
-  //int color1 = rand() % 255, color2 = rand() % 255, color3 = rand() % 255;
-  //scoreRectangle->SetColor(color1, color2, color3, 255);
   auto scoreScript = new ScoreScript(score);
   
-  //CatchAllController::GetInstance()->AddPlayer(cactus);
   AddGameObject(score);
-
-
 }
 
 void GamePlayScene::CreateMusic(){
 
   auto musicGamePlay = new GameObject("Music", new Vector(200, 200), 200, 100);
-
   auto themeMusic = new UISound(musicGamePlay, "MusicGamePlay", "assets/Audio/musicaGameplay16BitStereo.wav", true, true);
-
   AddGameObject(musicGamePlay);
-
 }
 

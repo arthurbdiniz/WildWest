@@ -205,9 +205,7 @@ void SDLSystem::LoadCommons() {
   auto mainScene = new MainScene();
   auto gamePlayScene = new GamePlayScene();
   auto gameOverScene = new GameOverScene();
-  //auto missileScene = new MissileScene();
-
-  //SceneManager::GetInstance()->AddScene(std::make_pair("Missile", missileScene));
+  
   SceneManager::GetInstance()->AddScene(std::make_pair("MainScene", mainScene));
   SceneManager::GetInstance()->AddScene(std::make_pair("Gameplay", gamePlayScene));
   SceneManager::GetInstance()->AddScene(std::make_pair("GameOver", gameOverScene));

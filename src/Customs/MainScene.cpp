@@ -6,7 +6,6 @@ void MainScene::OnActivation() {
   m_width_middle = EngineGlobals::screen_width / 2;
   m_height_middle = EngineGlobals::screen_height / 2;
   CreateBackground();
-  CreateLogo();
   CreatePlayButton();
   CreateQuitButton();
   CreateMusic();
@@ -26,28 +25,11 @@ void MainScene::OnShown() {}
 
 void MainScene::OnHidden() {}
 
-
-void MainScene::CreateLogo() {
-  /*
-  int xMiddle = EngineGlobals::screen_width / 2 - 100;
-
-  auto logo = new GameObject("Logo", new Vector(xMiddle, 100), 200, 100, 1);
-
-  auto logoText =
-      new UIText(logo, "Wild West ", "assets/Archivo_Black/ArchivoBlack-Regular.ttf",
-                 200, 255, 255, 255, 255, 1);
-
-  AddGameObject(logo);
-  */
-}
-
 void MainScene::CreatePlayButton() {
   int xMiddle = EngineGlobals::screen_width / 2 - 200;
 
   auto play = new GameObject("Play", new Vector(xMiddle, 425), 400, 100, 1);
-  //auto playText = new UIText(play, "Play", "assets/Raleway/Raleway-Regular.ttf",
-   //                          200, 255, 255, 255, 150, 1);
-
+  
   auto playImage = new Image("assets/Images/playnow.png", 0, 0, 1000, 597);
   auto playImageRenderer = new Renderer(play, playImage);
 
@@ -63,8 +45,6 @@ void MainScene::CreateQuitButton() {
 
   auto quit = new GameObject("Quit", new Vector(xMiddle, 535), 400, 100, 1);
 
-  //auto quitText = new UIText(quit, "Quit", "assets/Raleway/Raleway-Regular.ttf",
-  //                           200, 255, 255, 255, 150, 1);
   auto quitImage = new Image("assets/Images/quit.png", 0, 0, 1000, 597);
   auto mapRenderer = new Renderer(quit, quitImage);
 
@@ -78,7 +58,6 @@ void MainScene::CreateQuitButton() {
 
 
 void MainScene::CreateButtonSheriff() {
-  
 
   auto sheriff = new GameObject("Sheriff", new Vector(225, 675), 117, 100, 1);
 
@@ -97,7 +76,6 @@ void MainScene::CreateButtonHat() {
 
   auto hatImage = new Image("assets/Images/hat.png", 0, 0, 170, 150);
   auto hatRenderer = new Renderer(hat, hatImage);
-
   auto hatButton = new UIButton(hat);
 
   AddGameObject(hat);
@@ -118,9 +96,7 @@ void MainScene::CreateButtonBomb() {
 
 void MainScene::CreateButtonMod() {
   
-
   auto mod = new GameObject("Mod", new Vector(600, 675), 117, 100, 1);
-
   auto modImage = new Image("assets/Images/mod.png", 0, 0, 170, 150);
   auto modRenderer = new Renderer(mod, modImage);
 
@@ -133,13 +109,9 @@ void MainScene::CreateSecondQuitButton() {
   int xMiddle = EngineGlobals::screen_width / 2 - 200;
 
   auto secondQuit = new GameObject("SecondQuit", new Vector(950, 0), 75, 80, 1);
-
-
   auto quitImage = new Image("assets/Images/exit.png", 0, 0, 130, 142);
   auto mapRenderer = new Renderer(secondQuit, quitImage);
-
   auto quitButton = new UIButton(secondQuit);
-
   auto script = new QuitButtonScript(secondQuit);
 
   AddGameObject(secondQuit);
@@ -148,13 +120,12 @@ void MainScene::CreateSecondQuitButton() {
 
 
 void MainScene::CreateBackground() {
-  auto background = new GameObject("Background", new Vector(0, 0),m_width_middle * 2, m_height_middle * 2, 0);
 
+  auto background = new GameObject("Background", new Vector(0, 0),m_width_middle * 2, m_height_middle * 2, 0);
   auto backgrImage = new Image("assets/Images/bg_menu.png", 0, 0, 1000, 597);
   auto mapRenderer1 = new Renderer(background, backgrImage);
 
-  //auto backgroundRectangle = new RectangleRenderer(background, Vector(0, 0), m_width_middle * 2, m_height_middle * 2);
-  //backgroundRectangle->SetColor(100, 100, 20, 255);
+  
   AddGameObject(background);
 }
 
@@ -164,7 +135,6 @@ void MainScene::CreateBackground() {
 void MainScene::CreateMusic(){
 
   auto music = new GameObject("MusicMenu", new Vector(200, 200), 200, 100);
-
   auto themeMusic = new UISound(music, "Music", "assets/Audio/menuAudio16BitStereo.wav", true, true);
 
   AddGameObject(music);

@@ -34,7 +34,6 @@ void GamePlayController::PositPlayer() {
 void GamePlayController::ActivatePlayer() {
   
     auto script = (PlayerScript *)m_player->GetComponent("PlayerScript");
-    //script->ResetMovementCheck();
     m_player->ClearCollisions();
     m_player->active = true;
   

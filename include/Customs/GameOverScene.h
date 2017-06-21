@@ -6,8 +6,6 @@
 #include "Components/UIButton.h"
 #include "Components/UIText.h"
 #include "Components/UISound.h"
-#include "Customs/CatchAllButtonScript.h"
-#include "Customs/MissileButtonScript.h"
 #include "Customs/PlayButtonScript.h"
 #include "Customs/PlayAgainButtonScript.h"
 #include "Customs/QuitButtonScript.h"
@@ -34,14 +32,12 @@ public:
 private:
   int m_width_middle;
   int m_height_middle;
-  void CreateLogo();
   void CreatePlayAgainButton();
   void CreateQuitButton();
 
   void CreateMusic();
   void CreateBackground();
   void CreatePlayerScore();
-  //void CreateGamemodes();
 
 };
 

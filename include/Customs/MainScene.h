@@ -6,8 +6,8 @@
 #include "Components/UIButton.h"
 #include "Components/UIText.h"
 #include "Components/UISound.h"
-#include "Customs/CatchAllButtonScript.h"
-#include "Customs/MissileButtonScript.h"
+
+
 #include "Customs/PlayButtonScript.h"
 #include "Customs/QuitButtonScript.h"
 #include "Engine/Image.h"
@@ -25,7 +25,6 @@ public:
 private:
   int m_width_middle;
   int m_height_middle;
-  void CreateLogo();
   void CreatePlayButton();
   void CreateQuitButton();
 
@@ -37,7 +36,6 @@ private:
   void CreateButtonMod();
   void CreateSecondQuitButton();
   
-
 };
 
 #endif
