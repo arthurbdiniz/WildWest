@@ -11,7 +11,7 @@ void ScoreScript::Start() {
 void ScoreScript::ComponentUpdate() {}
 
 void ScoreScript::FixedComponentUpdate() {
-  score++;
+  m_score++;
   UpdateScore();
  
 }
@@ -23,8 +23,11 @@ void ScoreScript::UpdateScore(){
                    ->GetGameObject("Score")
                    ->GetComponent("UIText");
                    
-  var->SetText(std::to_string(score));
+  var->SetText("Score: " + std::to_string(m_score));
 
 }
 
+void ScoreScript::SetScore(int score){
+  this->m_score = score;
+}
 

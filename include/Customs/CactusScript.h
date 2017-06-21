@@ -19,12 +19,16 @@ protected:
   void Move();
   void GameCollisionCheck();
   void ScreenCollisionCheck();
+  void DifficultyIncrease();
 
 private:
   GameObject *player = nullptr;
   Vector *playerPosition = nullptr;
   PlayerScript *script = nullptr;
   char playerMovements;
+  float velocityCactus = 10;
+  float difficultyIncrease = 0;
+  
 };
 
 #endif

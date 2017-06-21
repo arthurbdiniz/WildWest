@@ -23,11 +23,11 @@ public:
   void SetText(string text);
   string GetText();
   void SetOffset(Vector &offset);
+  string m_message;
 
 private:
   Vector m_offset = Vector(0, 0);
   Uint8 m_mode = 0;
-  string m_message;
   SDL_Surface *m_surface = nullptr;
   TTF_Font *m_font = nullptr;
   SDL_Color m_color;

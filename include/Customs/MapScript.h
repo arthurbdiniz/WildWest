@@ -12,15 +12,21 @@ public:
   std::string GetComponentName() override { return "MapScript"; };
   void FixedComponentUpdate() override;
   void Start() override;
+  void SetVelocityMap(float velocityMap);
 
 protected:
   void ComponentUpdate() override;
+  void DifficultyIncrease();
+  
 
 private:
+
   GameObject *nakedMan = nullptr;
   Vector *nakedManPosition = nullptr;
   NakedManScript *script = nullptr;
-  char nakedManMovements;
+  char nakedManMovements = 0;
+  float m_velocityMap = 10;
+  float difficultyIncrease = 0;
 };
 
 #endif

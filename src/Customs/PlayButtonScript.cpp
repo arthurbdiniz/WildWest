@@ -8,6 +8,15 @@ void PlayButtonScript::Start() {
 
 void PlayButtonScript::ComponentUpdate() {
   if (m_uiButton->IsClicked()) {
+
     SceneManager::GetInstance()->SetCurrentScene("Gameplay");
+    /*
+    auto var = (UISound *)SceneManager::GetInstance()
+                   ->GetScene("MainScene")
+                   ->GetGameObject("MusicMenu")
+                   ->GetComponent("UISound");
+                   
+  	var->Stop();
+  	*/
   }
 }

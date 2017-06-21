@@ -8,11 +8,14 @@ void MapScript::Start() {
   script = (NakedManScript *)nakedMan->GetComponent("MapScript");
 }
 
-void MapScript::ComponentUpdate() {}
+void MapScript::ComponentUpdate() {
+
+}
 
 void MapScript::FixedComponentUpdate() {
+  DifficultyIncrease();
   nakedManMovements = script->GetMovement();
-  GetOwner()->GetPosition()->m_x -= 10;
+  GetOwner()->GetPosition()->m_x -= m_velocityMap;
   //cout <<  GetOwner()->GetPosition()->m_x << endl;
   if(GetOwner()->GetPosition()->m_x  < -2000){
     GetOwner()->GetPosition()->m_x = 1960;
@@ -34,3 +37,14 @@ void MapScript::FixedComponentUpdate() {
     GetOwner()->GetPosition()->m_y += 17;
   */
 }
+
+void MapScript::DifficultyIncrease(){
+  difficultyIncrease++;
+  m_velocityMap = m_velocityMap + difficultyIncrease/100000;
+
+}
+
+void MapScript::SetVelocityMap(float velocityMap){
+  this->m_velocityMap = velocityMap;
+}
+

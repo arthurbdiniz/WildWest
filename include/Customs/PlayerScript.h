@@ -6,6 +6,7 @@
 #include "Components/Animator.h"
 #include "Components/Script.h"
 #include "Components/UIText.h"
+#include "Components/UISound.h"
 #include "Engine/SceneManager.h"
 #include "Engine/GameObject.h"
 #include "Globals/EngineGlobals.h"
@@ -35,6 +36,7 @@ private:
   char movements = 0x00; // up down left right
   int deadzone_x = EngineGlobals::screen_width / 2 + 100;
   int deadzone_y = EngineGlobals::screen_height / 2 + 100;
+  int inputW = 0;
   
   void HandleInput();
   void GameCollisionCheck();

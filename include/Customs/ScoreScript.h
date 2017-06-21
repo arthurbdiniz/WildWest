@@ -9,18 +9,20 @@
 
 class ScoreScript : public Script {
 public:
-  ScoreScript(GameObject *owner);
-  std::string GetComponentName() override { return "ScoreScript"; };
-  void FixedComponentUpdate() override;
-  void Start() override;
-
+	ScoreScript(GameObject *owner);
+  	std::string GetComponentName() override { return "ScoreScript"; };
+  	void FixedComponentUpdate() override;
+  	void Start() override;
+  	void SetScore(int score);
+  
 protected:
-  void ComponentUpdate() override;
-  void UpdateScore();
+  	void ComponentUpdate() override;
+  	void UpdateScore();
+  	
  
 
 private:
-  int score = 0;
+	int m_score = 0;
   
 };
 

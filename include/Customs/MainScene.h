@@ -31,7 +31,12 @@ private:
 
   void CreateMusic();
   void CreateBackground();
-  //void CreateGamemodes();
+  void CreateButtonSheriff();
+  void CreateButtonHat();
+  void CreateButtonBomb();
+  void CreateButtonMod();
+  void CreateSecondQuitButton();
+  
 
 };
 

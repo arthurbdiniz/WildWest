@@ -9,12 +9,14 @@
 #include "Customs/CatchAllButtonScript.h"
 #include "Customs/MissileButtonScript.h"
 #include "Customs/PlayButtonScript.h"
+#include "Customs/PlayAgainButtonScript.h"
 #include "Customs/QuitButtonScript.h"
 #include "Engine/Image.h"
 #include "Engine/Scene.h"
 #include "Globals/EngineGlobals.h"
 #include "Components/Script.h"
 #include "Customs/PlayerScript.h"
+#include "Customs/ScoreScript.h"
 #include "Engine/SceneManager.h"
 #include "Engine/GameObject.h"
 
@@ -26,6 +28,8 @@ public:
   virtual void OnDeactivation() override;
   virtual void OnShown() override;
   virtual void OnHidden() override;
+
+  UIText *m_playerScoreText;
 
 private:
   int m_width_middle;

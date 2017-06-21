@@ -5,7 +5,8 @@ void GamePlayScene::OnActivation() {
   CreateMap();
   CreateCactus();
   CreateScore();
-  //CreateCactus2();
+  CreateMusic();
+  
 }
 
 void GamePlayScene::OnDeactivation() {}
@@ -53,6 +54,8 @@ void GamePlayScene::CreateNakedMan() {
 
   // Collider
   auto playerCollider = new RectangleCollider(player, Vector(0, 0), 80, 130, 0);
+
+  auto jumpSoundEffect = new UISound(player, "SFXJump", "assets/Audio/jump.wav", false, true);
   
   // rigidbody
   //auto nakedManRB = new Rigidbody(nakedMan);
@@ -141,7 +144,7 @@ void GamePlayScene::CreateCactus() {
 void GamePlayScene::CreateScore() {
 
   
-  auto score = new GameObject("Score", new Vector(800, 20), 60, 100, 2);
+  auto score = new GameObject("Score", new Vector(800, 10), 150 , 100, 2);
   score->SetTag("Score");
   
   auto scoreText = new UIText(score, "0", "assets/Carnevalee/Carnevalee-Freakshow.ttf", 150, 0 , 0, 0, 0, 1);
@@ -157,3 +160,14 @@ void GamePlayScene::CreateScore() {
 
 
 }
+
+void GamePlayScene::CreateMusic(){
+
+  auto musicGamePlay = new GameObject("Music", new Vector(200, 200), 200, 100);
+
+  auto themeMusic = new UISound(musicGamePlay, "MusicGamePlay", "assets/Audio/musicaGameplay16BitStereo.wav", true, true);
+
+  AddGameObject(musicGamePlay);
+
+}
+

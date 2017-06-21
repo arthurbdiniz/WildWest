@@ -8,6 +8,7 @@
 #include "Components/Renderer.h"
 #include "Components/Rigidbody.h"
 #include "Components/UIText.h"
+#include "Components/UISound.h"
 #include "Customs/GamePlayController.h"
 #include "Customs/MapScript.h"
 #include "Customs/CactusScript.h"
@@ -23,12 +24,14 @@ public:
   void OnDeactivation() override;
   void OnShown() override;
   void OnHidden() override;
+  
 
 private:
   void CreateNakedMan();
   void CreateMap();
   void CreateCactus();
   void CreateScore();
+  void CreateMusic();
 
 };
 

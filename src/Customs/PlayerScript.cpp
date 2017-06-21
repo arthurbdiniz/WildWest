@@ -19,11 +19,15 @@ static int lastDirection=1;
   if (input->GetKeyPressed(INPUT_W)) {
     //lastDirection=0;
     movements = movements | 0x08;
-    //****aanimator->PlayAnimation("Walk Up");
+
+    auto var = GetOwner()->GetComponent("UISound"); //Play Jump Sound Effect         
+    var->Start();
+
+    animator->PlayAnimation("Walk Up");
 
   } 
   if(position->m_y < 600){
-    //****aanimator->PlayAnimation("Walk Up");
+    animator->PlayAnimation("Walk Up");
 
   }
 
@@ -65,7 +69,11 @@ static int lastDirection=1;
   if (InputSystem::GetInstance()->GetKeyUp(INPUT_ESCAPE)) {
     //auto var = (UIText *)SceneManager::GetInstance()->GetScene("Main")->GetGameObject("Play")->GetComponent("UIText");
     //var->SetText("Continue");
+
+
     SceneManager::GetInstance()->SetCurrentScene("Main");
+
+
   }
   if (InputSystem::GetInstance()->GetKeyUp(INPUT_UP)) {
       SceneManager::GetInstance()->SetCurrentScene("CatchAll");
@@ -75,16 +83,23 @@ static int lastDirection=1;
 
 void PlayerScript::FixedComponentUpdate() {
   if (0x08 & movements){
-    //position->m_y -= walkSpeed;
-    jumpForce = 10;
-    position->m_y = position->m_y - jumpForce;
-    jumpForce = jumpForce - gravity;
+    inputW++;  
+    if(inputW < 11){
+      jumpForce = 10;
+      position->m_y = position->m_y - jumpForce;
+      jumpForce = jumpForce - gravity;
+
+    }
+    
   }
   if(position->m_y < 600){
     position->m_y = position->m_y - jumpForce;
     jumpForce = jumpForce - gravity;
-    //jumpForce -= gravity; 
-    //position->m_y -= jumpForce;
+
+  }
+  if(position->m_y >= 600){
+    position->m_y = 600;
+    inputW = 0;
   }
   //cout << position->m_y << endl;
   
@@ -125,3 +140,5 @@ void PlayerScript::GameCollisionCheck() {
   }
   */
 }
+
+
